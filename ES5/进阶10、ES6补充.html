@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            /**
+             * ES6中默认使用严格模式，
+             *      箭头函数本身没有this，this也不会自动指向window对象
+             * */
+             const name = 'Jane';
+             const age = '
+             youAge'
+             
+            const person = {
+               [name]: true,
+               [age]: 20
+            }
+            
+            // 构造函数的写法
+            // function Person(name,age){
+            //     this.name = name;
+            //     this.age = age;
+            // }
+            // Person.prototype.say = function(){
+            //     console.log(this.name)
+            // }
+            
+            
+            // es6的写法
+            class Person{
+                constructor(name,age) {
+                    this.name = name
+                    this.age = age
+                }
+                
+                static c  = '静态变量'
+                a = 666
+                
+                // 函数前面添加一个static关键字，表明这是一个静态方法，不会被实例继承，只能通过类来调用
+                static foo(){
+                    console.log('我是静态方法')
+                }
+                
+                say(){
+                    console.log(this.name)
+                }
+            }
+            
+            let per = new Person('nick',20)
+            per.say()
+            // per.foo()            //会报错
+            Person.foo()            //我是静态方法
+            console.log(per.a)      //666
+            console.log(per.c)      //undefined
+            console.log(Person.c)   //静态变量
+            
+        </script>
+	</body>
+</html>

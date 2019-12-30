@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            /* 
+                如果调用者函数被某一个对象所拥有，那么该函数在调用时，其内部的this指向该对象，
+                如果函数独立调用，那么该函数内部的this，指向undefined，但是在非严格模式下，
+                当this指向undefined时，它会自动指向全局变量
+                
+                使用匿名函数会导致this指向的丢失（setTimeout）
+                
+                改变this的三种方式：
+                    fn.call(target,1,2);
+                    fn.apply(target,[1,2]);
+                    fn.bind(target)(1,2)
+            */
+            var name = 'messi';
+            var obj = {
+                name: 'nick',
+                showName: function(){
+                    return this.name
+                }
+            }
+            // alert(obj.showName())    //nick
+            
+            
+            // 严格模式下,this为undefined
+            function show(){
+                'use strict'
+                console.log(this.name)
+            }
+            window.show();  // show是调用者，被window所拥有
+            show();         // show是调用者，独立调用
+            
+            /* 
+                使用call，apply手动设置this的指向，除了参数略有不同，其它完全相同，第一个参数都是this要指向的对象
+                后面跟着的参数为向要执行的函数传递的参数，call以一个一个的形式传递，apply以数组的形式传递
+            */
+            //将fn的this指向obj
+            function fn(num1, num2) {
+               console.log(this.a + num1 + num2);
+            }
+            var obj = {
+               a: 20
+            }
+           
+            fn.call(obj, 100, 10); // 130
+            fn.apply(obj, [20, 10]); // 50
+           
+           
+            // 解决匿名函数this丢失的问题
+            /* 1、使用一个变量把this的引用保存下来
+            var obj = {
+               a: 20,
+               getA: function() {
+                   var self = this;
+                   setTimeout(function() {
+                       console.log(self.a)
+                   }, 1000)
+               }
+            } */
+            /* 2、使用ES5自带的bind
+            var obj = {
+               a: 20,
+               getA: function() {
+                   setTimeout(function() {
+                       console.log(this.a)
+                   }.bind(this), 1000)
+               }
+            } */
+           
+            // 在面向对象中,new运算符所做的事情中有改变this指向这一步
+            function Person(name, age) {
+               // 这里的this指向了谁?
+               this.name = name;
+               this.age = age;   
+            }
+            Person.prototype.getName = function() {
+               // 这里的this又指向了谁？
+               return this.name;
+            }
+            // 上面的2个this，是同一个吗，他们是否指向了原型对象？
+            var p1 = new Person('Nick', 20);
+            p1.getName();
+        </script>
+	</body>
+</html>

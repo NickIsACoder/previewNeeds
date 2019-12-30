@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            //var
+            var num = 99;
+            var num = 100;//var定义的变量可以重新赋值
+            if(num){
+                var count = 60;//var为函数作用域,所以定义的count为全局变量
+            }
+            function getCount(){
+                var add = 600;//var为函数作用域,所以定义的add为局部变量
+            }
+            
+            
+            // let/const
+            // 当值为基础数据类型时,const定义的不允许改变,当值为引用数据类型时,可以修改其引用值里面的值
+            
+            let val = 10;//为全局作用域
+                val = 20;//可重新赋值
+            // let val = 20;    //报错,let定义的变量不可在同一个作用域中重复定义
+            if(val==10){
+                let val = 20;//为局部作用域
+            }
+            const key = 'abc';//const定义的变量不可修改
+            // key = 'qwe';//报错,不允许修改
+            const person = {
+                name:'nick',
+                age:'26'
+            }
+            // person = { name:'sam'}//不允许改变person的值
+            person.age = 18;//修改成功,
+            person.add = 'add';//添加成功,
+        </script>
+	</body>
+</html>

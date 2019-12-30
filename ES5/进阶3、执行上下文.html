@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            /*
+                执行上下文
+                
+                类型：
+                    1、全局执行上下文
+                    2、函数执行上下文
+                    3、evel执行上下文
+                    
+                执行上下文的生命周期：
+                    1、创建阶段
+                    2、代码执行阶段
+                
+                创建执行上下文的过程包括：
+                    1、生成变量对象
+                    2、建立作用域链
+                    3、确定this的指向
+                    
+                代码执行过程：
+                    1、全局上下文入栈，自上而下执行
+                    2、全局上下文中的函数被调用时，该函数创建自己的指向上下文，该函数的执行上下文被push入执行栈顶层，开始执行该函数执行上下文，全局执行上下文被挂起
+                    3、执行该函数中的可执行代码，执行完毕后，该函数执行上下文被pop出栈，全局执行上下文继续往下执行
+                    4、若再没有遇到其他执行上下文，则执行上下文中只剩下全局执行上下文，浏览器窗口关闭时，全局执行上下文出栈
+                
+                
+                注：函数中，遇到return能直接终止可执行代码的执行，因此会直接将当前上下文弹出栈
+            */
+           
+           /* 
+                变量对象VA
+                
+                执行顺序：
+                    function声明比var声明优先
+                    
+                注：活动对象 (AO): 当变量对象所处的上下文为 激活执行上下文 时，称为活动对象。
+           */
+          function test() {
+              console.log(foo);
+              console.log(bar);
+          
+              var foo = 'Hello';
+              console.log(foo);
+              var bar = function () {
+                  return 'world';
+              }
+            
+              function foo() {
+                  return 'hello';
+              }
+          }
+          
+          /* // 上述函数的真正执行过程为
+          function test(){
+              function foo() {
+                  return 'hello';
+              }
+              console.log(foo);
+              console.log(bar);
+                        
+              var foo = 'Hello';
+              console.log(foo);
+              var bar = function () {
+                  return 'world';
+              }
+          } */
+          test();
+          // 输出结果为
+          // foo(){
+          //     return 'hello';
+          // }
+          // undefined
+          // Hello
+        </script>
+	</body>
+</html>

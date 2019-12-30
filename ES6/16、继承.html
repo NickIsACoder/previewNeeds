@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+       <script type="text/javascript">
+           // es5
+           /* function User(name,age){
+               this.name = name;
+               this.age = age;
+           }
+           User.prototype.showName = function(){
+               alert(this.name);
+           }
+           User.prototype.showAge = function(){
+               alert(this.age)
+           }
+           // Vipuser继承User
+           function VipUser(name,age,level){
+               User.call(this,name,age);
+               this.level = level;
+           }
+           VipUser.prototype = new User();
+           VipUser.prototype.showLevel = function(){
+               alert(this.level)
+           }
+           
+           var user1 = new VipUser('nick',26,3);
+           user1.showAge();
+           user1.showName();
+           user1.showLevel(); */
+           
+           // es6
+            class User {
+                constructor(name,age) {
+                    this.name = name;
+                    this.age = age;
+                }
+                showAge(){
+                    alert(this.age);
+                }
+                showName(){
+                    alert(this.name);
+                }
+            }
+            
+            class VipUser extends User {
+                constructor(name,age,level) {
+                    super(name,age);//  有super才能使用this,表示构造函数的继承,和ES5中的call/apply功能一样
+                    this.level = level;
+                }
+                
+                showLevel(){
+                    alert(this.level);
+                } 
+            }
+            
+            var user2 = new VipUser('nick',26,88);
+            user2.showAge();
+            user2.showName();
+            user2.showLevel();
+            
+       </script>
+	</body>
+</html>

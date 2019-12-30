@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            let colors = new Set();
+            console.log(colors);
+            
+            colors.add('red');
+            colors.add('blue');
+            console.log(colors);        //{"red", "blue"}
+            console.log(colors.size);   //2
+            
+            colors.add('5');
+            colors.add(5);
+            console.log(colors);        //{"red", "blue", "5", 5}
+            
+            colors.add('blue');
+            console.log(colors);        //{"red", "blue", "5", 5}相同的不会重复添加
+            
+            colors.delete('blue')       //true
+            console.log(colors);        //{"red", "5", 5}
+            
+            colors.has('5');            //true
+            colors.has(5);              //true
+            
+            // colors.clear();
+            // console.log(colors);        //{}
+            
+            // 遍历
+            const data = colors.values();
+            console.log(data.next());       //{value: "red", done: false}
+            console.log(data.next());       //{value: "5", done: false}
+            console.log(data.next());       //{value: 5, done: false}
+            
+            for (let c of colors) {
+                console.log(c)              //'red' '5' 5 
+            }
+            
+            colors.forEach((item,key,ownSet)=>{
+                console.log( item,key,ownSet);
+                // red red Set(3) {"red", "5", 5}
+                // 5 5 Set(3) {"red", "5", 5}
+                // 5 5 Set(3) {"red", "5", 5}
+            })
+            
+            let color2 = new Set(['apple','banana','pear']);
+            console.log(color2)         //{"apple", "banana", "pear"}
+            
+            // 应用例子
+            const arr = [1,2,5,3,3,5,2,7];
+            const arrSet = new Set(arr);
+            console.log(arrSet);            //{1, 2, 5, 3, 7}
+            const arrSetToarr = [...arrSet]
+            console.log(arrSetToarr);       //[1, 2, 5, 3, 7]
+        </script>
+	</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // es5
+            // function User(name,age){
+            //     this.name = name;
+            //     this.age = age;
+            // }
+            // User.prototype.showName = function(){
+            //     alert(this.name);
+            // }
+            // User.prototype.showAge = function(){
+            //     alert(this.age)
+            // }
+            // 
+            // var user1 = new User('nick',26);
+            // user1.showAge();
+            // user1.showName();
+
+            // es6
+            class User {
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+                showAge() {
+                    alert(this.age);
+                }
+                showName() {
+                    alert(this.name);
+                }
+
+                // 静态方法,只能在user上使用
+                static showInfo() {
+                    console.log(`static is run!`)
+                }
+
+
+                set gitName(value) {
+                    this.gitname = value;
+                }
+
+                get gitName() {
+                    return `show ${this.gitname}`
+                }
+            }
+            
+            // 只能在声明后使用
+            var user2 = new User('nick', 26);
+            user2.showAge();
+            user2.showName();
+
+            // user2.showInfo();  //报错
+            User.showInfo(); //static is run!
+
+            user2.gitName = 'pppopppssssp'; //pppopppssssp
+            console.log(user2.gitName); //show pppopppssssp
+        </script>
+    </body>
+</html>

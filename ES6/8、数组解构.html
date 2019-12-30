@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            const numbers = ['one','two','three','four']
+            const lang = ['javascript','java']
+            
+            /* const [ one, two, three ] = numbers;
+            console.log(one, two, three )//one two three */
+            
+            /* const [ one,, three ] = numbers;
+            console.log(one, three )//one three */
+            
+            /* const [ one,...others] = numbers;//others必须为最后一个
+            console.log(one, others )//one ["two", "three", "four"] */
+            
+            // 默认值,undefined时生效
+            const [ lang1,lang2,lang3='php' ] = lang;
+            console.log(lang1, lang2,lang3 );//javascript java php
+            // 应用场景
+            let a = '666';
+            let b = '999';
+            [ b, a ] = [a,b];
+            console.log(b,a)
+        </script>
+	</body>
+</html>

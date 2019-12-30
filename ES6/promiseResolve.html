@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <!-- 
+            Promise.resolve()
+            用于将现有对象转化为Promise对象
+            
+            Promise.resolve('foo')
+            等价于
+            new Promise(resolve => resolve('foo'))
+            
+            
+            参数可分为四种情况
+            1、参数是一个promise实例，Promise.resolve将原封不动返回这个实例
+            2、参数是一个thenable对象，Promise.resolve方法会将这个对象转为 Promise 对象
+            3、参数不是具有then方法的对象，或根本就不是对象，Promise.resolve方法返回一个新的 Promise 对象，状态为resolved。
+            4、无参数，直接返回一个resolved状态的 Promise 对象
+         -->
+         
+         <script type="text/javascript">
+             // thenable对象指的是具有then方法的对象，比如下面这个对象
+             let thenable = {
+               then: function(resolve, reject) {
+                 resolve(42);
+               }
+             };
+             
+             let p1 = Promise.resolve(thenable);
+             p1.then((val)=>{
+                 console.log(val)
+             })
+             
+             
+             // 3
+             let p2 = Promise.resolve('888');
+             p2.then((val)=>{
+                 console.log(val)
+             })
+             
+             
+             // 4
+             Promise.resolve().then( ()=> console.log('sss'))
+         </script>
+	</body>
+</html>

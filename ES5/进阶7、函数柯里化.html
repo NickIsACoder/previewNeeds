@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            /* 
+                概念：指封装一个函数，接收原始函数作为参数传入，并且返回一个能够接收并处理剩余参数的函数
+                
+                主要特点：参数复用、延迟执行、提前返回
+                体现：
+                    参数复用：下述例子中，正则验证第一个参数reg进行复用
+                    延迟执行：js中使用的bind方法
+                    提前返回：浏览器兼容性判断
+                
+                缺陷：（影响性能）
+                    1、存取arguments对象通常要比存取命名参数要慢一些
+                    2、一些老版本浏览器在argumens.length的实现上相当的慢
+                    3、使用fn.apply(...)和fn.call(...)通常要比直接调用fn()要慢
+                    4、大量的嵌套和闭包会带来开销，影响内存占用和作用域链的读取速度
+                    
+            */
+                
+                // 经典面试题);
+                // 柯里化的封装
+                function createCurry(func,args){
+                    var len = func.length;
+                    var args = args || [];
+                    
+                    return function(){
+                        // 将具有length属性的对象转成数组
+                        var _args = [].slice.call(arguments);
+                        console.log(_args);
+                        // 将args追加到_args里面
+                        [].push.apply(_args,args);
+                        
+                        // 如果参数个数小于最初的func.length，则递归调用，继续收集参数
+                        if(_args.length<len){
+                            return createCurry.call(this,func,_args)
+                        }
+                        
+                        // 参数收集完毕，则执行func
+                        return func.apply(this,_args)
+                    }
+                }
+                
+                // 面试题1
+                function add(a,b,c){
+                    return a+b+c
+                }
+                var _add = createCurry(add);
+                
+                console.log(_add(1)(2)(3));
+                console.log(_add(1,2,3));
+                console.log(_add(1)(2,3));
+                
+                
+                // 面试题2
+                function check(str, reg) {
+                    return reg.test(str);
+                }
+                var _check = createCurry(check);
+                
+                var checkPhone = _check(/^1[34578]\d{9}$/);
+                var checkEmail = _check(/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/);
+                
+                console.log(checkPhone('13828883828'))  //true
+                console.log(checkPhone('xxxxx@test.com'))
+        </script>
+	</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // 使用方法
+            // const p = new Promise((reslove, reject) => {
+            //     setTimeout(() => {
+            //         // reslove('request is success');//执行then()
+            //         reject('request is failed');//执行catch()
+            //         // reject(Error('request is failed'));
+            //     }, 1000)
+            // })
+            // p.then(data => { console.log(data);})
+            //  .catch(err => { 
+            //      console.error(err);//报错信息会提示在此行
+            //  })
+             
+             
+            // 实例
+            const farrs = [
+                {name: 'apple',number:2, id:1 },
+                {name: 'banana',number:0, id:2 },
+                {name: 'orange',number:5, id:3 },
+                {name: 'pear',number:5, id:4 }
+            ]
+            const local = [
+                {location:'上海', name: 'apple' },
+                {location:'广州', name: 'banana' },
+                {location:'深圳', name: 'orange' }
+            ]
+            
+            function getInfo(id){
+                return new Promise((reslove,reject) => {
+                    const fruit = farrs.find( farr => farr.id===id );
+                    if (fruit) {
+                        reslove(fruit)
+                    } else {
+                        reject(Error('found no fruit.'))
+                    }
+                })
+            }
+            // getInfo(1)
+            //     .then(data => {
+            //         console.log(data);//{name: "apple", number: 2, id: 1}
+            //     })
+            //     .catch(err =>{
+            //         console.error(err);
+            //     })
+                
+            function addInfo(data){
+                return new Promise((reslove,reject) => {
+                    const fruit = local.find( item => item.name===data.name );
+                    if (fruit) {
+                        reslove(fruit)
+                    } else {
+                        reject(Error('found no fruit name.'))
+                    }
+                })
+            }
+            
+            getInfo(4)
+                .then(data => {
+                    // console.log(data);
+                    return addInfo(data)
+                })
+                .then(data => {
+                    console.log(data);//{location: "广州", name: "banana"}
+                })
+                .catch(err =>{
+                    console.error(err);
+                })
+        </script>
+    </body>
+</html>

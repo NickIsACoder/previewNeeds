@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+        <style type="text/css">
+            *{
+                margin: 0;padding: 0;box-sizing: border-box;
+            }
+            /* 触发BFC来解决 以下问题 */
+            .BFC{
+                /* position: absolute; */
+                /* overflow: hidden; */
+                /* display: flex; */
+                display: flow-root;
+            }
+            .aaa{
+                width: 100px;height: 100px; margin-bottom: 20px;background: red;
+            }
+            .bbb{
+                width: 100px;height: 100px; margin-top: 30px;background: #008080;
+            }
+            /*  */
+            .ccc{
+                height: 200px;width: 200px; background: cadetblue;
+            }
+            .ddd{
+                width: 100px;height: 100px;margin: 20px;background: blueviolet;
+            }
+            .eee{
+                border: 2px solid red;
+            }
+            .fff{
+                width: 100px;height: 100px;float: right;background: #008080;
+            }
+            .ggg{
+                float: left;width: 100px;height: 100px;background: #5F9EA0;
+            }
+            .hhh{
+                width: 200px;height: 200px;background: #8A2BE2;
+            }
+            .left{
+                width: 150px;height: 150px;background: #008080;float: left;
+            }
+            .right{
+                height: 150px; background: #8A2BE2;
+            }
+        </style>
+	</head>
+	<body>
+        <!-- BFC，块级格式化上下文
+           处于BFC中的元素与外部元素相互隔离，内外的元素定位不会相互影响
+           
+           产生BFC的方式：
+            1、浮动元素：float 除 none 以外的值。
+            2、绝对定位元素：position (absolute、fixed)。
+            3、display 为 inline-block、table-cells、flex。
+            4、overflow 除了 visible 以外的值 (hidden、auto、scroll)。
+        -->
+        
+        <!-- BFC的作用 -->
+        
+        <!-- 此类问题产生的原因，是浏览器解析的问题，也可以说是一种解析规范 -->
+        <h3>margin重叠问题1</h3>
+        <!-- 此时两div间隔为30px，发生了重叠 -->
+        <div class="aaa"></div>
+        <div class="bbb"></div>
+        <hr >
+        <!-- 解决方法 -->
+        <div class="aaa"></div>
+        <div class="BFC">
+            <div class="bbb"></div>
+        </div>
+        
+        <hr >
+        <hr >
+        <h3>margin重叠问题2</h3>
+        <!-- 里面div的margin-top与外面div的重叠了 -->
+        <div class="ccc">
+            <div class="ddd"></div>
+        </div>
+        <hr >
+        <!-- 解决方式 -->
+        <div class="ccc BFC">
+            <div class="ddd"></div>
+        </div>
+        <hr >
+        <hr >
+        <h3>高度塌陷问题 <!-- 清除内部浮动 --> </h3>
+        <!-- 里层div浮动后，外层div出现高度塌陷问题 -->
+        <div class="eee">
+            <div class="fff"></div>
+        </div>
+        <!-- 解决方式 -->
+        <div class="eee BFC" style="border-color: #8A2BE2">
+            <div class="fff"></div>
+        </div>
+        
+        <hr >
+        <hr >
+        <h3>元素被浮动元素覆盖问题</h3>
+            <!-- 元素hhh被浮动元素ggg覆盖了 -->
+          <div class="ggg">我是浮动的元素</div>
+          <div class="hhh">我是没有浮动的元素，也没有触发BFC</div>
+        <!-- 解决方式 -->
+        <div class="ggg">我是浮动的元素</div>
+        <div class="hhh BFC">我是没有浮动的元素，触发了BFC</div>
+        
+        <hr >
+        <hr >
+        <h3>自适应两栏布局</h3>
+        <div class="left"></div>
+        <div class="right"> 没有触发bfc，我的宽度为100%</div>
+        <!-- 解决方法 -->
+        <hr >
+        <div class="left"></div>
+        <div class="right BFC"> 触发bfc，我的宽度为100%-left的宽</div>
+        
+        <hr >
+        <hr >
+        <h3>使用BFC实现自适应三栏布局</h3>
+        <style type="text/css">
+            .d_left,.d_right{
+                width: 100px;height: 100px;
+            }
+            /* 浮动触发BFC */
+            .d_left{
+                float: left;background: darkmagenta;
+            }
+            .d_right{
+                float: right;background: brown;
+            }
+            .d_center{
+                display:table-cell;
+                width:900px;/*宽度大到屏幕宽度即可*/
+                /*hack手段，针对IE6、7*/
+                *display:inline-block;
+                *width:auto;
+                height:100px;   /* 需放在后面 */
+                background:#008080;
+            }
+        </style>
+        <div class="d_left"></div>
+        <div class="d_right"></div>
+        <div class="d_center"></div>
+	</body>
+</html>

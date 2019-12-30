@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            function Fa(){}
+            const a = new Fa();
+            // 实例为a,构造函数为Fa,原型为Fa.prototype
+            // 函数才有prototype，实例对象只有__proto__
+            // 所有函数都有prototype(原型),所有对象都有__proto__(隐式原型)
+            /*  三者的关系为:
+                构造函数.prototype === 原型
+                实例.__proto__ === 原型
+                实例.constructor === 构造函数
+                原型.constructor === 构造函数
+             */
+            console.log(a.__proto__ === Fa.prototype)               //true
+            console.log(a.constructor === Fa)                       //true
+            console.log(Fa.prototype.constructor === Fa)            //true
+            console.log(Fa.prototype === Fa)
+            
+            
+            // 原型链
+            function A () {}
+            function B () {}
+            function C () {}
+             
+            B.prototype = new A()
+            C.prototype = new B()
+            const c = new C()
+             
+            console.log(
+              c.__proto__ ===  C.prototype,  //  true
+              C.prototype.__proto__ === B.prototype,  // true
+              B.prototype.__proto__ === A.prototype,  // true
+              A.prototype.__proto__ === Object.prototype, // true
+              Object.prototype.__proto__ === null // true
+            )
+            
+            // *原型链最顶端就是Object.prototype。 而Object.prototype的原型对象是null
+            // 当JS查找一个对象的成员时，先查找自身是否拥有该成员，若没有，则在它隐式原型形成的链条中查询该成员，查找到了则停止  ，否则继续查找，直到链条的终点——NULL。若都查找不到，返回undefined。(向上查找)
+            // 可以使用hasOwnProperty 来避免属性的查找
+            // Function的隐式原型指向自身原型。Object的隐式原型指向null，比较特殊。
+            // 对象自身和它隐式原型串联的对象，会形成一个链条，该链条叫做原型链。
+            
+            // new关键字的作用
+                // 1、创建一个新的对象
+                let aa = {}
+                // 2、将新对象的__proto__，指向构造函数的prototype对象
+                aa.__proto__ = Fa.prototype
+                // 3、让Fa中的this指向aa,并执行Fa函数体
+                Fa.call(aa);
+                // 4、判断返回值类型
+                    // 如果是值类型，返回obj。如果是引用类型，就返回这个引用类型的对象。
+                /* 简易的理解
+                1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
+                2、属性和方法被加入到 this 引用的对象中。
+                3、新创建的对象由 this 所引用，并且最后隐式的返回 this.    */
+                    
+                
+                    
+            // 原型链继承的写法
+                function Person(){
+                    this.name = '小米'
+                }
+                Person.prototype.getName = function(){
+                    console.log(this.name,this.Fname)
+                }
+                function Father(){
+                    this.Fname = '爸爸'
+                }
+                Father.prototype = new Person();
+                Father.prototype.getFatherName = function(){
+                    console.log(this.Fname)
+                }
+                const per = new Father()
+                per.getName()           //小米 爸爸
+        </script>
+	</body>
+</html>

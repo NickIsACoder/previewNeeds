@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <!-- proxy可以用来重写对象上的一些默认的方法 -->
+        <script type="text/javascript">
+            const person = {
+                name: 'Leo Messi',
+                age: 31
+            };
+            const personProxy = new Proxy(person, {
+                get(target, key) {
+                    return 'from ' + target[key];
+                },
+                set(target, key, value) {
+                    if (typeof value === 'string') {
+                        target[key] = value.trim(); //去掉字符串左右的空格
+                    }
+                }
+            });
+            personProxy.name = '      football king      ';
+            console.log(personProxy) //{name: "football king", age: 31}
+            console.log(personProxy.name) //"from football king";
+
+
+            // 应用例子1
+            const handler = {
+                set(target, key, value) {
+                    target[key] = value.match(/[0-9]/g).join(''); //去除空格,13719394695
+                },
+                get(target, key) {
+                    return target[key].replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+                }
+            }
+            const phoneNumber = new Proxy({}, handler);
+            phoneNumber.home = '137 1939 4695';
+            console.log(phoneNumber.home); //137-1939-4695
+
+            // 应用例子2
+            const dataHandler = {
+                set(target, key, value) {
+                    const likekey = Object.keys(target).find(k => k.toLowerCase() === key.toLocaleLowerCase())
+
+                    if (!(key in target) && likekey) {
+                        throw new Error('对象中存在此key，或者存在与此key相近大小写不一致的key')
+                    }
+                    
+                    target[key] = value
+                }
+            }
+            const dataObj = new Proxy({
+                id: 100
+            }, dataHandler);
+            
+            dataObj.ID = 5;         //报错,对象中存在此key，或者存在与此key相近大小写不一致的key
+            dataObj.id = 4;
+            console.log(dataObj.id);    //4
+        </script>
+    </body>
+</html>

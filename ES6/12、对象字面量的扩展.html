@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            const name = 'nick';
+            const age = '16';
+            const address = '安师大'
+            
+            const infoObj = {
+                // name: name,
+                name,//缩写方式,(属性名与变量名同样时)
+                age,
+                address,
+                // showName: function(){
+                //     alert(`hello ${this.name}`)
+                // },
+                showName(){//缩写
+                    console.log(`hello ${this.name}`)
+                }
+            }
+            console.log(infoObj)//{name: "nick", age: "16", address: "安师大", showName: ƒ}
+            infoObj.showName();//hello nick
+            
+            // 计算属性
+            let id = 0;
+            const users = {
+                [`user_${++id}`]: id,
+                [`user_${++id}`]: id,
+                [`user_${++id}`]: id,
+            }
+            console.log(users)//{user_1: 1, user_2: 2, user_3: 3}
+        </script>
+	</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            // Array.from()
+            // 将一个类数组对象或者可遍历对象转换成一个真正的数组
+            // 类数组对象，最基本的要求就是具有length属性的对象
+            let arrayLike = {
+                0: 'tom', 
+                1: '65',
+                2: '男',
+                3: ['jane','john','Mary'],
+                'length': 4
+            }
+            let arrayLike2 = {
+                0: 'tom', 
+                1: '65',
+                2: '男',
+                3: ['jane','john','Mary'],
+            }
+            // let newarr = Array.from(arrayLike);
+            // let newarr2 = Array.from(arrayLike2);
+            // console.log(newarr) //["tom", "65", "男", ['jane','john','Mary']]
+            // console.log(newarr2)//[]
+            
+            // 属性名需为数字
+            /* let arrayLike3 = {
+                'name': 'tom', 
+                'age': '65',
+                'sex': '男',
+                'friends': ['jane','john','Mary'],
+                length: 4
+            }
+            let newarr3 = Array.from(arrayLike3);
+            console.log(newarr3)//[undefined, undefined, undefined, undefined]
+            
+            // 将字符串转换为数组
+            let  str = 'hello world!';
+            console.log(Array.from(str)) // ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"]
+            // 可引入第二个参数,为function
+            // 每个元素进行处理
+            let arr = [12,45,97,9797,564,134,45642]
+            let set = new Set(arr)
+            console.log(Array.from(set, item => item + 1)) // [ 13, 46, 98, 9798, 565, 135, 45643 ] */
+            
+            // Array.of()
+            // console.log(new Array(1))   //[empty × 1]
+            // console.log(new Array(5))   //[empty × 5]
+            // console.log(new Array(5,10))    //[5,10]
+            // console.log(Array.of(5))    //[5]
+            // console.log(Array.of(5,10))    //[5,10]
+            
+                
+            const farr = [
+                {name: 'apple',number:2},
+                {name: 'banana',number:0},
+                {name: 'orange',number:5},
+            ]
+            // .find()
+            // const banana = farr.find( fruit=>{
+            //     console.log(fruit.name);
+            //     if( fruit.name=='banana'){
+            //         return true;
+            //     }
+            //     
+            //     return false
+            // })
+            // 简写()
+            const banana = farr.find(fruit=>fruit.name=='banana')
+            console.log(banana)//{name: "banana", number: 0}
+            
+            // .findIndex
+            const bananaIndex = farr.findIndex(fruit=>fruit.name=='banana')
+            console.log(bananaIndex)//1
+            
+            // .some(),一个满足就返回true
+            const isEnough = farr.some(fruit=>fruit.number>1)
+            console.log(isEnough)//true
+            
+            // .every()是否全部满足条件
+            const isAllEnough = farr.every(fruit=>fruit.number>1)
+            console.log(isAllEnough)//false
+            
+            // .filter 筛选
+            let arr1 = [1,2,3];
+            let arr2 = arr1.filter((value,key,arr) => {
+                console.log(value)    // 1，2，3
+                console.log(key)      // 0，1，2
+                console.log(arr)      // [1,2,3]
+                return value >= 3 ? false : true;     
+            })
+            console.log(arr1); // [ 1, 2, 3 ]
+            console.log(arr2); // [ 1, 2 ]
+            
+        </script>
+	</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            /* 
+                // 借助构造函数继承
+                // 使用call和apply借用其他构造函数的成员, 可以解决给父构造函数传递参数的问题, 但是获取不到父构造函数原型上的成员.也不存在共享问题
+                // call或者apply用来继承实例的属性
+                function father(){
+                    this.name = 'messi';
+                    this.age = 32
+                }
+                function child(){
+                    father.call(this);
+                    this.childName = 'mateo'
+                }
+                let nChild = new child();
+                console.log(nChild.name);  //messi
+                
+                // 缺陷
+                father.prototype.say = function(){
+                    console.log('my name is '+this.name);
+                }
+                nChild.say();   //nChild.say is not a function
+                //问题： 构造函数继承法只能实现部分继承，如果我们在父类Parent1的原型链上添加属性或者方法的时候子类的实例无法继承到。
+            */
+           
+            /* 
+                // 原型链继承
+                // 子构造函数.prototype = new 父构造函数()
+                function Father1(){
+                    this.name = 'messi';
+                    this.age = 32;
+                }
+                Father1.prototype.sayName = function(){
+                    console.log('Father1:  '+this.name)
+                }
+                function Child1(){
+                    this.childName = 'Mateo'
+                }
+                Child1.prototype = new Father1();
+                Child1.prototype.show = function(){
+                    console.log('从原型继承的信息：'+this.name+'__'+this.childName)
+                }
+                let c1 = new Child1();
+                c1.sayName();   //Father1:  messi
+                c1.show();      //从原型继承的信息：messi__Mateo 
+                
+                // 问题：不能给父构造函数传递参数，父子构造函数的原型对象之间有共享问题
+            */
+            
+            /* // 创建父构造函数
+            function Person(name,age){
+                this.name = name;
+                this.age = age;
+                this.showName = function(){
+                    console.log(this.name);
+                }
+            }
+            // 设置父构造函数的原型对象
+            Person.prototype.showAge = function(){
+                console.log('32',this.age);
+            }
+            // 创建子构造函数
+            function Student(name){
+                Person.call(this,name);
+            }
+            // 设置继承
+            Student.prototype = Person.prototype;
+            Student.prototype.constructor = Student;
+            var s1 = new Student('messi',32);
+            s1.showName();      //messi
+            s1.showAge();      //32 undefined */
+            
+            
+            
+            // 构造函数和原型链组合继承
+            // 解决了构造函数和原型链继承两者的问题,为最常用的继承方式
+            function Father(name){
+                this.name = name;
+                this.colors = ['red','green','blue']
+            }
+            Father.prototype.sayName = function(){
+                console.log(this.name)
+            }
+            function Son(name,age){
+                Father.call(this,name);  //继承实例属性，第一次调用Father()
+                this.age = age
+            }
+            Son.prototype = new Father();//继承父类方法,第二次调用Father()
+            Son.prototype.sayAge = function(){
+                console.log(this.age)
+            }
+            
+            const son = new Son('小明',10);
+            son.sayName()                           //小明
+            son.sayAge()                            //10
+            son.colors.push('black');
+            console.log(son.colors);                 //["red", "green", "blue", "black"]
+            
+            
+            const son1 = new Son('白白',20);
+            son1.sayName()                           //白白
+            son1.sayAge()                            //20
+            console.log(son1.colors);           //["red", "green", "blue"]
+        </script>
+	</body>
+</html>

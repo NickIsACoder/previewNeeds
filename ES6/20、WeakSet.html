@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            let leo = {
+                name: 'leo',
+                age: 10
+            };
+            let tom = {
+                name: 'tom',
+                age: 20
+            };
+
+            const person = new WeakSet([leo, tom]);
+            console.log(person) //{{name:'leo',age:10}, {name:'tom',age:20}};
+
+            // 只能add对象
+            person.add({
+                name: 'nick',
+                age: 120
+            })
+            console.log(person) //{{name:'nick',age:120}, {name:'leo',age:10}, {name:'tom',age:20}}
+            
+            // 不能使用for of 循环
+            
+            const personArr = [leo, tom];
+            console.log(personArr)         // [{name:'leo',age:10}, {name:'tom',age:20}]
+            leo = null;
+            // leo并没有被清除掉       为内存泄漏
+            console.log(personArr)         // [{name:'leo',age:10}, {name:'tom',age:20}]
+            
+            // console.log(person)      //当person没有被调用时leo就会被垃圾回收机制清除
+        </script>
+    </body>
+</html>

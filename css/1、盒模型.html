@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		#a{
+            width: 200px;
+            height: 200px;
+            border: 1px solid;
+            background-color: teal;
+            margin: 10px;
+            padding: 10px;
+		}
+		#b{
+            width: 200px;
+            height: 200px;
+            border: 1px solid;
+            background-color: red;
+            margin: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+		}
+ 
+	</style>
+</head>
+<body>
+	<div id="a"></div>
+	<div id="b"></div>
+    <script type="text/javascript">
+        
+        // 不包括margin
+        console.log(document.getElementById('a').offsetWidth)  //222
+        console.log(document.getElementById('b').offsetWidth)   //200
+        
+        
+        /*
+         盒模型分为：W3C盒模型（标准盒模型）、ie盒模型（怪异盒模型）
+         盒模型包括：margin、border、padding、content
+         
+         标准盒模型：即content-box  , width = content
+         怪异盒模型：即border-box   , width = content + padding + border
+        */
+         
+         
+    </script>
+</body>
+</html>

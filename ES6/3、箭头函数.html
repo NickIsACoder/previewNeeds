@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            const arr = [10, 20, 30, 40];
+            const double = arr.map(function(num){
+                return num*2;
+            })
+            // console.log(double)
+            // [20, 40, 60, 80]
+            
+            // 箭头函数改写
+            // const double2 = arr.map((num) => {
+            //     return num*2;
+            // })
+            // console.log(double2);//[20, 40, 60, 80]
+            // 当只有一个参数时,可省略()
+            // const double2 = arr.map(num => {
+            //     return num*2;
+            // })
+            // 当没有或者多个参数时,需加上()
+            const double2 = arr.map((num,i) => {
+                return num*2;//拥有return为显式返回
+            })
+            // 箭头函数优势之一,可隐式返回
+            const double3 = arr.map((num) => num*2 );//隐式返回方式
+            console.log(double3)
+            
+            // 箭头函数为匿名函数,
+            // 将匿名函数赋值给一个变量来转化为命名函数
+            
+            // 箭头函数没有自己的this值,其this值是继承父级作用域的
+            const person = {
+                name:'nick',
+                hobbies:['sleep','sing','game'],
+                showName:function(){
+                    console.log(this);//this指向person
+                    // this.hobbies.map(function(hb){
+                    //     console.log(`${this.name} love ${hb}`);//此处this指向window
+                    // })
+                    this.hobbies.map((hb) => {
+                        console.log(`${this.name} love ${hb}`);//此处this指向person
+                    })
+                }
+            }
+            person.showName();
+        </script>
+	</body>
+</html>

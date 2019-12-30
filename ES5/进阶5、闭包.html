@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            /* 
+                闭包
+                    闭包就是能够读取其他函数内部变量的函数
+                    闭包是一种特殊的对象，它由两部分组成，执行上下文（代号A）以及在该执行上下文中创建的函数（代号B）
+                    当B执行时，如果访问了A中变量对象中的值，那么闭包就会产生
+                    （闭包最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。）
+                    
+                    
+                闭包的作用
+                    1、通过闭包，我们可以在其它执行上下文中访问到函数的内部变量
+                    2、闭包可以用来模拟私有方法，可以限制对代码的访问并且不会污染全局命名空间
+                
+                使用闭包会产生的问题及解决方法
+                    1、闭包会导致内存占用过高,因为变量都没有释放内存。解决方法是，在退出函数之前，将不使用的局部变量全部删除
+                    2、多个子函数的作用域链都是同时指向父级，是完全共享的。因此当父级的变量对象被修改时，所有子函数都受到影响。
+            */
+           
+           /* getNameFunc里面return的函数为闭包 ，其return的this为window*/
+       //      var name1 = "The Window";
+       // 　　  var object1 = {
+       // 　　　　 name : "My Object",
+       // 　　　　 getNameFunc : function(){
+       // 　　　　　　 return function(){
+       // 　　　　　　　　 return this.name;   
+       // 　　　　　　 };
+       // 　　　　 }
+       // 　　 };
+       //      alert(object.getNameFunc()());//The Window
+            
+        //     var name = "The Window";
+        // 　　var object = {
+        // 　　　　name : "My Object",
+        // 　　　　getNameFunc : function(){
+        // 　　　　　　var that = this;
+        // 　　　　　　return function(){
+        // 　　　　　　　　return that.name;   
+        // 　　　　　　};
+        // 　　　　}
+        // 　　};
+        //     alert(object.getNameFunc()());//My Object
+           
+           // 通过闭包访问其它执行上下文中的变量
+           // var fn = null;
+           // function foo() {
+           //     var a = 2;
+           //     function innnerFoo() {
+           //         console.log(a);
+           //     }
+           //     fn = innnerFoo; // 将 innnerFoo的引用，赋值给全局变量中的fn
+           // }
+           
+           // function bar() {
+           //     fn(); // 此处的保留的innerFoo的引用
+           // }
+           
+           // foo();
+           // bar(); // 2
+           
+           // 经典试题  使其输出 0 1 2 3 4 
+           // for (var i = 0; i < 5; i++) {
+           //     setTimeout(function() {
+           //         console.log(i)
+           //     }, 10);
+           // }
+           // 结果 55555
+           
+            // 通过闭包解决
+            // 1、相当于setTimeout(undefined, ...);
+            // for (var i = 0; i < 5; i++) {
+            //     setTimeout(function(i) {
+            //         console.log(i)
+            //     }(i), 1000*i);
+            // }   // 0 1 2 3 4  立即输出
+            
+            // 2、
+            // for (var i = 0; i < 5; i++) {
+            //     (function(i){
+            //         setTimeout(function() {
+            //             console.log(i)
+            //         }, 1000*i);
+            //     })(i)
+            // }   // 0 1 2 3 4 每隔一秒输出一个
+            
+            // for (var j = 0; j < 5; j++) {
+            //     (function(){    //去掉i后，内部没有对 i 保持引用，其实会变成输出 5
+            //         setTimeout(function() {
+            //             console.log(j)
+            //         }, 10);
+            //     })(j)
+            // }   // 5 5 5 5 5
+            
+            
+            
+            
+            
+           /* for (var i = 0; i < 5; i++) {
+                setTimeout(function() {
+                    console.log(new Date, i);
+                }, 1000);
+            } 
+            console.log(new Date, i);   //相差一秒
+            // 输出
+            // Tue Oct 15 2019 17:01:34 GMT+0800 (中国标准时间) 5
+            // Tue Oct 15 2019 17:01:35 GMT+0800 (中国标准时间) 5
+            // Tue Oct 15 2019 17:01:35 GMT+0800 (中国标准时间) 5
+            // Tue Oct 15 2019 17:01:35 GMT+0800 (中国标准时间) 5
+            // Tue Oct 15 2019 17:01:35 GMT+0800 (中国标准时间) 5
+            // Tue Oct 15 2019 17:01:35 GMT+0800 (中国标准时间) 5 */
+            
+            // 如要输出     5 -> 0,1,2,3,4
+            // 方式1
+            // for (var i = 0; i < 5; i++) {
+            //     (function(j){// j = i
+            //         setTimeout(function() {
+            //             console.log(new Date, j);
+            //         }, 1000);
+            //     })(i)
+            //  } 
+            // console.log(new Date, i); 
+            // 方式2
+            // function run(i){
+            //     setTimeout(function() {
+            //         console.log(new Date, i);
+            //     }, 1000);
+            // }
+            // for (var i = 0; i < 5; i++) {
+            //     run(i)
+            //  } 
+            // console.log(new Date, i);
+            
+            // 需要输出0 -> 1 -> 2 -> 3 -> 4 -> 5
+            var tasks = [];
+            function runTask(i){
+                setTimeout(function() {
+                    new Promise((resolve)=>{
+                        console.log(new Date, i);
+                        resolve();
+                    })
+                }, 1000*i);
+            }
+            for (var i = 0; i < 5; i++) {
+                tasks.push(runTask(i));
+             } 
+            Promise.all(tasks).then(()=>{
+                setTimeout(()=>{
+                    console.log(new Date, i); 
+                },1000)
+            })
+            
+            
+            
+            
+            
+            // // // // // // // // // // // // // // // // // // // // // // // 
+            // // // // // // // // // // // // // // // // // // // // // // //
+            // 试题2
+            // var op = document.querySelectorAll("p");
+            // for (var j = 0; j < op.length; j++) {
+            //   op[j].onclick = function() {
+            //     alert(j);
+            //   };
+            // }
+            //alert出来的值是一样的
+            // 解决办法一:
+            // for (var j = 0; j < op.length; j++) {
+            //   (function(j) {
+            //     op[j].onclick = function() {
+            //       alert(j);
+            //     };
+            //   })(j);
+            // }
+            // 解决办法二:
+            // for (var j = 0; j < op.length; j++) {
+            //   op[j].onclick = (function(j) {
+            //     return function() {
+            //       alert(j);
+            //     };
+            //   })(j);
+            // }
+        </script>
+	</body>
+</html>

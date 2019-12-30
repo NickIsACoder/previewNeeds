@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Javascript面向对象编程（二）：构造函数的继承</title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            // 实现继承的5种方式
+            function Animal(){
+        　　　　this.species = "动物";
+            }
+            
+            
+            // --------------------------------------------------------------
+            // --------------------------------------------------------------
+            // --------------------------------------------------------------
+            // 1、构造函数继承:用call()或者apply()把父对象的指向this改为子对象
+            //      缺点:不能继承原型上的方法和属性
+            function Dog1(name,age){
+                Animal.call(this,arguments);
+                // Animal.apply(this,arguments);
+                this.name = name;
+                this.age = age;
+            }
+            var dog1 = new Dog1('旺财',5);
+            console.log(dog1.species)   //动物
+            
+            
+            // --------------------------------------------------------------
+            // --------------------------------------------------------------
+            // --------------------------------------------------------------
+            // 2、prototype模式：把子对象的prototype对象指向父对象的一个实例
+            //      缺点：如果子对象的prototype对象上有属性或方法时，将被清除
+            function Dog2(name,age){
+                this.name = name;
+                this.age = age;
+            }
+            Dog2.prototype = new Animal();
+            // 使Dog2.constructor指向了Animal,造成继承链的紊乱,需要手动纠正
+            Dog2.prototype.constructor = Dog2;
+            // 手动纠正,指回原来的构造函数。
+            
+            var dog2 = new Dog2('旺财',5);
+            console.log(dog2.species)   //动物
+            
+            
+            
+            // --------------------------------------------------------------
+            // --------------------------------------------------------------
+            // --------------------------------------------------------------
+            // 3、直接继承prototype:相对第二种来说效率更高,节省内存
+            //      缺点：如果子对象的prototype对象上有属性或方法时，将被清除
+            function Animal1(){ }
+            Animal1.prototype.species = "动物";
+            
+            function Dog3(name,age){
+                this.name = name;
+                this.age = age;
+            }
+            Dog3.prototype = Animal1.prototype;
+            Dog3.prototype.constructor = Dog3;
+            var dog3 = new Dog3('旺财',5);
+            console.log(dog3.species)   //动物
+            
+            
+            // --------------------------------------------------------------
+            // --------------------------------------------------------------
+            // --------------------------------------------------------------
+            // 4.利用空对象作为中介
+            //      缺点：如果子对象的prototype对象上有属性或方法时，将被清除;
+            // 封装了
+            function extend(Child, Parent) {
+        　　　　var F = function(){};
+        　　　　F.prototype = Parent.prototype;
+        　　　　Child.prototype = new F();
+        　　　　Child.prototype.constructor = Child;
+        　　　　Child.uber = Parent.prototype;//这里的uber是个名称，可以随意命名
+        　　}
+            
+            function Dog4(name,age){
+                Dog4.uber.constructor.call(this); //添加代码
+                this.name = name;
+                this.age = age;
+            }
+            
+            extend(Dog4,Animal);
+            var dog4 = new Dog4("大毛","黄色");
+            alert(dog4.species); // 动物
+            
+            
+            // 5、拷贝继承
+            // 缺点：只能继承原型上的属性和方法;
+            
+            // 不变的属性和函数都直接写在prototype对象上
+            Animal.prototype.kan = '看';
+            
+            function copy(Parent,Child){
+                var p = Parent.prototype;
+                var c = Child.prototype;
+                
+                for( var i in p){
+                    c[i] = p[i]
+                }
+                c.uber = p;
+            }
+            
+            function Dog5(name,color){
+        　　　　this.name = name;
+        　　　　this.color = color;
+        　　}
+            
+            copy(Animal,Dog5);
+            var cp1 = new Dog5('nick','red');
+            console.log(cp1.kan)
+            
+        </script>
+	</body>
+</html>

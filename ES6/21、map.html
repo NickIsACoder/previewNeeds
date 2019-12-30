@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            const person = new Map();
+            person.set('leo',24);
+            person.set('messi',24);
+            person.set('tom',25);
+            
+            console.log(person);                // {"leo" => 24, "messi" => 24, "tom" => 25}
+            console.log(person.size);           //3
+            console.log(person.has('tom'));     //true
+            console.log(person.delete('tom')); //true
+            //  person.clear()
+            // console.log(person);        //{}
+            
+            for (let [key,value] of person) {
+                console.log(key,value)          //messi 24  leo 24
+            }
+            
+            const person2 = new Map([['leo',24],['tom',99]])
+            console.log(person2)                //{"leo" => 24, "tom" => 99}
+        </script>
+	</body>
+</html>

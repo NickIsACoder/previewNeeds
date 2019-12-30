@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Javascript 面向对象编程（一）：封装</title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            /* function Dog(name,age){
+                this.name = name;
+                this.age = age;
+            }
+            var dog1 = new Dog('旺财',3);
+            var dog2 = new Dog('来福',5);
+            console.log(dog1.name);     //旺财
+            console.log(dog2.name);     //来福
+            
+            console.log(dog1.constructor == Dog)    //true
+            console.log(dog2.constructor == Dog)    //true
+            
+            console.log(dog1 instanceof Dog)    //true
+            console.log(dog2 instanceof Dog)    //true 
+            
+            // 内存浪费的问题
+            /* function Dog(name,age){
+                this.name = name;
+                this.age = age;
+                this.color = 'red';
+                this.showName = function(){
+                    console.log(this.name);
+                }
+            }
+            var dog1 = new Dog('旺财',3);
+            var dog2 = new Dog('来福',5);
+            console.log(dog1.showName==dog2.showName) //false */
+            // 每实例化一次,color和showName()方法都会生成一次,内容重复,占用内存,重复的内容应该只生成一次
+            // 改进方法如下:
+            function Dog(name,age){
+                this.name = name;
+                this.age = age;
+            }
+            Dog.prototype.color = 'red';
+            Dog.prototype.showName = function(){
+                console.log(this.name);
+            }
+            var dog1 = new Dog('旺财',3);
+            var dog2 = new Dog('来福',5);
+            console.log(dog1.showName==dog2.showName)   //true 
+            
+            // isPrototypeOf()用来判断某个prototype对象与某个实例之间的关系
+            console.log(Dog.prototype.isPrototypeOf(dog1))      //true
+            
+            // hasOwnProperty()来判断某一个属性到底是本地属性，还是继承自prototype对象的属性。
+            console.log(dog1.hasOwnProperty("name")); // true
+            console.log(dog1.hasOwnProperty("color")); // false
+            // in运算符 某个实例是否含有某个属性
+            console.log("name" in dog1); // true
+            console.log("color" in dog1); // true
+        </script>
+	</body>
+</html>

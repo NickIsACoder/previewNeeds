@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            function show(a,b){
+                a = a || 3;
+                b = b || 5;
+                console.log(a*b);
+            }
+            // show(1,2);// 2
+            // show();// 15
+            
+            // 默认参数形式
+            function show2(a = 3,b = 5){
+                console.log(a * b);
+            }
+            show2(1,2);// 2
+            show2();// 15
+            show2(5);// 25
+            // show2(,2);// 报错
+            show2(undefined,2);// 6(函数参数的默认值为undefined)
+            show2(null,2);// 只能使用undefined
+        </script>
+	</body>
+</html>

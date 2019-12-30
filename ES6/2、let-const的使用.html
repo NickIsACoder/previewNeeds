@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            let a = 99
+            // es5中
+            ;(function (aa) {//立即执行函数,应用场景之一为用来生成私有变量
+                var num = 10;//为私有变量,外部无法获取
+                console.log(aa);//10
+            })(a);
+            // es6中
+            {
+                let num = 10;//为局部变量,外部无法获取
+            }
+            
+            // es5中
+            for (var i = 0; i < 10; i++) {
+                console.log(i);//0~9
+                setTimeout(()=>{
+                    console.log(i);//10个10
+                },1000)
+            }
+            // es6中
+            // for (let i = 0; i < 10; i++) {
+            //     console.log(i);//0~9
+            //     setTimeout(()=>{
+            //         console.log(i);//0~9
+            //     },1000)
+            // }
+            
+            // 变量提升(将变量声明提升到作用域顶部)
+            // var 存在变量提升
+            // console.log(age)//undefined
+            // var age = 10;
+            // 实际执行顺序为;
+            /* 
+                var age;
+                console.log(age);//undefined
+                age = 10;//10
+            */
+           
+           // let和const也存在变量提升,但是还拥有临时性死区的概念
+           // console.log(key)//处于临时性死区中,key is not defined
+           // let key = 'abc';
+           
+           // var let const使用规则
+           // 默认使用const
+           // 当变量需要绑定或者更新时使用let
+           // 尽量不使用var
+        </script>
+	</body>
+</html>

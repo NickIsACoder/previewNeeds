@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            const id = '440804199308230932'
+            const str = 'I am super'
+            
+            // 以..开头
+            console.log(id.startsWith('44'));//true
+            id.startsWith('1993',6)//true
+            str.startsWith('I')//true
+            str.startsWith('i')//false,(大小写敏感)
+            
+            id.endsWith('932');//true
+            str.endsWith('r')//true
+            str.endsWith('R')//false(大小写敏感)
+            str.endsWith('am',4)//true
+            
+            str.includes('super')//true
+            str.includes('super',6)//false
+            str.includes('super',5)//true
+            
+            '='.repeat(10)//"=========="
+        </script>
+	</body>
+</html>

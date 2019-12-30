@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <script type="text/javascript">
+            /**
+             *  面向对象
+             *      面向对象编程简称OOP，具有灵活、代码可复用、高度模块化的特点，容易维护和开发，适合多人合作的大型项目
+             *      目的在于提高代码的开发效率和可维护性，
+             * 
+             *      面向对象的三大特性：封装、继承、多态
+             *          封装：隐藏对象的属性和实现细节，仅对外提供公共访问方式，好处是将变化隔离，便于使用，提高了复用性和安全性
+             *          继承：提高代码的复用性，继承是多态的前提
+             *          多态：父类或接口定义的引用变量可以指向子类或者具体实现类的实例对象，优点是提高了程序的拓展性
+             * 
+             *      对象定义的两种方式：
+             *      1、使用new Object进行定义
+             *          var obj = new Object();
+             *      2、使用字面量的方式来定义
+             *          var obj = {}
+             * 
+             *      （属于封装模块）
+             *      创建对象的三种方式：
+             *          1、工厂模式
+             *          2、构造函数模式
+             *          3、原型模式
+             * 
+             *      （继承模块）
+             *      参考2、继承的方式.html文件
+             *      
+            */
+           
+            // 工厂模式
+            // 优点：解决了单例模式中代码重复的问题
+            // 缺点：生成的实例之间没有任何内在的联系,不能反映出是同一个原型对象的实例
+                function Person(name,age,sex){
+                    var obj = {};
+                    obj.name = name;
+                    obj.age = age;
+                    obj.sex = sex;
+                    return obj;
+                }
+                
+                var person1 = Person('nick',26,'man');
+                
+            // 构造函数模式
+            // 优点：能够检测原型对象与实例对象的关系
+            // 缺点：每次创建出的对象都只有私有方法和私有变量,无法实现共用,
+            //      还会造成内存浪费的问题,一些重复的属性和方法每个实例都会生成,占用内存 
+            function Animal(name,sex,age){
+                this.type = '猫';
+                this.name = name;
+                this.sex = sex;
+                this.age = age;
+            }
+            
+            var animal1 = new Animal('max','man',2);
+            // 实例会含有一个constructor属性指向构造函数
+            // alert(animal1.constructor === Animal)   //true
+            // 可用instanceof运算符来检测原型对象与实例对象的关系
+            // alert(animal1 instanceof Animal)        //true
+            
+            
+            // prototype模式
+            // 优点：所有实例的那些不会改变的属性和方法直接定义在prototype对象上,指向同一个地址,不会重复占用内存
+            function Cat(name,age){
+                this.name = name;
+                this.age = age;
+            }
+            Cat.prototype.type = '猫';
+            Cat.prototype.say = function(){
+                alert('miao');
+            }
+            var cat1 = new Cat('小红',3);
+            
+            
+             // prototype模式的验证方法
+             // 1、判断某个prototype对象与某个实例之间的关系
+             console.log( Cat.prototype.isPrototypeOf(cat1) )   //true
+             // 2、判断一个属性是本地属性还是prototype对象的属性
+             console.log( cat1.hasOwnProperty('name') )   //true
+             console.log( cat1.hasOwnProperty('type') )   //false
+            // 3、判断某个实例是否有某个属性,不管是不是本地属性
+            console.log( 'name' in cat1 )   //true
+            console.log( 'type' in cat1 )   //true
+            console.log( 'nnns' in cat1 )   //false
+            
+            
+            // 多态
+            // instanceof用于判断一个变量是否是某个对象的实例
+            function makeSound(animal){
+                if (animal.sound instanceof Function) {
+                    animal.sound();
+                }
+            }
+            function Duck(){}
+            Duck.prototype.sound = function(){
+                console.log('嘎嘎嘎')
+            }
+            function Chicken(){}
+            Chicken.prototype.sound = function(){
+                console.log('咯咯咯')
+            }
+            
+            makeSound(new Duck());//嘎嘎嘎
+            makeSound(new Chicken());//咯咯咯
+            
+            // 对象的多态性,每个对象应该做什么不是临时决定的,而是事先已经安排好的,每个对象负责他们自己的行为
+            // 多态增加了代码的可拓展性,降低了代码的维护成本
+            
+        </script>
+	</body>
+</html>

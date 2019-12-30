@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <ul>
+            <li>啊啊啊</li>
+            <li>阿达达</li>
+            <li>爱就爱设计大奖</li>
+            <li>卡萨丁</li>
+        </ul>
+        <script type="text/javascript">
+            const arr = [1,2,3]
+            const sum = arr.reduce((prev,curr) => {
+                console.log(prev+'__'+curr)
+                return prev + curr;
+            })
+            console.log(sum);//6
+            
+            // function sum(...nbs){
+            //     // console.log(idx,nbs)
+            //     return nbs.reduce((prev,curr,index,arr) => {
+            //         // console.log(prev,curr)
+            //        return prev + curr
+            //     },0)
+            // }
+            // console.log(sum(1,2,3,4,5))//15
+            // console.log(sum(1,2,3))//6
+            
+            function converCurrency(idx, ...nbs){
+                return nbs.map( nb=> nb*idx );
+            }
+            // console.log(converCurrency(0.5,1,2,3))//[0.5, 1, 1.5]
+            
+            const info = ['nick','abc221122',10,12,22,12,13];
+            const [name, id, ...scores] = info;
+            console.log(name,id,scores)//nick abc221122  [10, 12, 22, 12, 13]
+            
+            // 扩展运算符
+            const arr1 = ['abc','bbb','ccc'];
+            const arr2 = ['ddd','eee','uuu'];
+            // 合并两个数组,并在中间插入新的项
+            const newArr = [...arr1,'88888',...arr2];
+            // console.log(newArr)//["abc", "bbb", "ccc", "88888", "ddd", "eee", "uuu"]
+            
+            // 注意的问题
+            // const otherArr = newArr;//为浅拷贝
+            // otherArr[0] = '1111';
+            // console.log(otherArr);//["1111", "bbb", "ccc", "88888", "ddd", "eee", "uuu"]
+            // console.log(newArr);//["1111", "bbb", "ccc", "88888", "ddd", "eee", "uuu"]
+            // 解决方法
+            const newOtherArr = [...newArr];
+            newOtherArr[0] = '1111';
+            console.log(newOtherArr);//["1111", "bbb", "ccc", "88888", "ddd", "eee", "uuu"]
+            console.log(newArr);// ["abc", "bbb", "ccc", "88888", "ddd", "eee", "uuu"]
+            
+            // 扩展运算符应用 场景
+            // const dom = Array.from(document.querySelectorAll('li'));//转化为数组
+            // console.log(dom)
+            const doms = [...document.querySelectorAll('li')];//转化为数组
+            // console.log(doms)
+            const txt = doms.map( dom=>{
+                return dom.textContent;
+            })
+            console.log(txt)//["啊啊啊", "阿达达", "爱就爱设计大奖", "卡萨丁"]
+            
+            const favorites = {
+                fruits: ['apple','orange'],
+                color: ['red','blue']
+            }
+            const strArr = ['milk','water',...favorites.color];
+            console.log(strArr)//["milk", "water", "red", "blue"]
+            const strStr = 'favorites';
+            console.log([...strStr])//["f", "a", "v", "o", "r", "i", "t", "e", "s"]
+            
+            
+            // 使用扩展运算符删除数组的某一项
+            const infoArr = [
+                {name:'nick',age:10},
+                {name:'sam',age:30},
+                {name:'messi',age:20},
+                {name:'tom',age:40},
+            ]
+            const infoIndex = infoArr.findIndex(todo => todo.age === 30);
+            const newInfoArr = [...infoArr.slice(0,infoIndex), ...infoArr.slice(infoIndex+1)]
+            console.log(newInfoArr)//[{name:'nick',age:10},{name:'messi',age:20}, {name:'tom',age:40}]
+            
+            // 扩展运算符在函数中的应用
+            const arrA = ['apple','orange'];
+            const arrB = ['red','green'];
+            // arrA.push.apply(arrA,arrB);//["apple", "orange", "red", "green"]
+            arrA.push(...arrB)//["apple", "orange", "red", "green"]
+            console.log(arrA)
+            
+            const timeArr = [2019,7,25];
+            
+            // const time = new Date(timeArr[0], timeArr[1], timeArr[2]);//Sun Aug 25 2019 00:00:00 GMT+0800 (中国标准时间)
+            const time = new Date(...timeArr)//Sun Aug 25 2019 00:00:00 GMT+0800 (中国标准时间)
+            console.log(time)
+            
+        </script>
+        
+	</body>
+</html>
