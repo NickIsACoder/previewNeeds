@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONP实现跨域2</title>
+</head>
+<body>
+    <script src="" type="text/javascript" charset="utf-8"></script>
+    <div id="mydiv">
+        <button id="btn">点击</button>
+    </div>
+</body>
+<script type="text/javascript">
+    function handleResponse(response){
+        console.log(response);
+    }
+//在页面中，返回的JSON作为参数传入回调函数中，我们通过回调函数来来操作数据。
+</script>
+<script type="text/javascript">
+    window.onload = function() {
+        var oBtn = document.getElementById('btn');
+        oBtn.onclick = function() {     
+            jsonp("https://bf6e1ee3-1d9d-4d34-bed0-a13458b7d08d.mock.pstmn.io/test","callback",function(res){
+                console.log(res)
+            },)
+            //动态创建<script>标签，设置其src，回调函数在src中设置：
+            // var script = document.createElement("script");
+            // script.src = "https://bf6e1ee3-1d9d-4d34-bed0-a13458b7d08d.mock.pstmn.io/test";
+            // document.body.insertBefore(script, document.body.firstChild);   
+        };
+    };
+
+    function jsonp(url, jsonpCallback, success) {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.type = 'text/javascript'
+        window[jsonpCallback] = function(data) {
+            success && success(data)
+        }
+        document.body.appendChild(script)
+    }
+</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <!-- 
+            get和post的区别：
+                1、get参数URL可见，post参数URL不可见
+                2、get通过拼接url传递参数，产生一个TCP包，post通过body传递参数，产生两个TCP包
+                3、get传输数据大小不超过2-4k，post传输数据大小由配置文件设定，也可以为无限大
+                4、请求页面后退时，get不产生影响，post会重新请求
+                5、get可以主动缓存cache，post不可以
+                6、get比post更不安全
+                7、get的请求参数会被完整保留在浏览器历史记录中，post的请求参数不会
+         -->
+         
+         
+         <!-- 
+            跨域：
+               由于同源策略的限制，导致出现跨域问题。同源策略指同协议、同域名、同端口，发起ajax请求的时候会出现
+               
+            解决方法：
+                1、设置CORS：服务器在响应报头中设置 Access-Control-Allow-Origin：*
+                2、postMessage方式，子页面postMessage，父页面window.addEventListener("message",function(){})或者window.onmessage
+                3、WebSocket 
+                4、proxy代理
+                    webpack 添加proxyTable
+                    nginx   server里面的location的proxy_pass
+          -->
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+        <!-- <script src="http://localhost:8000/jsonp_get2?callback=jsonpProcess" type="text/javascript" charset="utf-8"></script> -->
+        <div id="mydiv">
+            <button id="btn">jsonp只能实现GET请求</button>
+        </div>
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            // 第一种jsonp方式
+            // $.ajax({
+            //     url:"http://localhost:8000/jsonp_get1",
+            //     dataType:"jsonp",
+            //     success:function (data) {
+            //         console.log(data)
+            //     }
+            // });
+            
+            // 第二种jsonp方式
+            function jsonpProcess(data) {
+                console.log(data)
+            }
+            function jsonp_Script() {
+                var _script = document.createElement("script");
+                _script.type = "text/javascript";
+                _script.src = "http://localhost:8000/jsonp_get2?callback=jsonpProcess";
+                document.head.appendChild(_script)
+            }
+            jsonp_Script(); 
+            
+            
+            // CORS方式跨域
+            // $.ajax({
+            //     url:"http://localhost:8000/goods",
+            //     dataType:"json",
+            //     success:function (data) {
+            //         console.log(data)
+            //     }
+            // });
+        </script>
+	</body>
+</html>

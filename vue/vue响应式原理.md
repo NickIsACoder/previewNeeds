@@ -1,0 +1,2 @@
+当把一个普通的javascript对象传入vue实例做为data选项时，Vue将遍历此对象所有的属性，并使用`object.difineProperty()`把这些属性全部转化为`getter/setter`。所以Vue实例初始化时就已经`在data对象上存在`的属性才具备响应式。
+如果在实例创建之后添加新的属性到实例上，该属性没有经过转换，所以不具有响应式

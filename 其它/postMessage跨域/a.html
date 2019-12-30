@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+         <iframe src="http://127.0.0.1:8848/LEARN/%E5%85%B6%E5%AE%83/postMessage%E8%B7%A8%E5%9F%9F/b.html" frameborder="0" id="frame"></iframe> 
+        <script type="text/javascript">
+             window.addEventListener('message',function (event) {
+                 console.log(event)
+                 if(event.origin=='http://127.0.0.1:8848'){
+                     console.log(event.data)  //会输出event的数据
+                 }
+             },false)
+        </script>
+	</body>
+</html>
