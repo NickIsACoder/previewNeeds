@@ -51,6 +51,19 @@
            
             fn.call(obj, 100, 10); // 130
             fn.apply(obj, [20, 10]); // 50
+            
+            // 遇到bind时
+            function a() {
+                console.log(this.name);
+            }
+            const b = {
+                name: "segmentFault"
+            }
+            a.bind(b,12)
+            //bind跟apply,call的本质区别，bind不会改变原函数的this指向，只会返回一个新的函数（我们想要的那个this指向），并且不会调用
+            const c = a.bind(b,12)
+            c()     //segmentFault
+            
            
            
             // 解决匿名函数this丢失的问题
@@ -87,6 +100,38 @@
             // 上面的2个this，是同一个吗，他们是否指向了原型对象？
             var p1 = new Person('Nick', 20);
             p1.getName();
+            
+            
+            
+            // 自己实现call
+            Function.prototype.mycall = function(context,...arg){
+                const fn = Symbol('临时属性')   //Symbol每次生成的实例都不一样
+                context[fn] = this
+                context[fn](...arg)
+                delete context[fn]
+            }
+            
+            /* 实现思路：
+               通过对象属性的方法调用函数，这个函数里面的this指向对象
+               每次调用新增一个symbol属性，调用完毕删除
+               这个symbol属性就是调用mycall方法的函数
+               函数形参中使用...arg是将多个形参都塞到一个数组里，在函数内部使用arg这个变量时，就是包含所有形参的数组
+               在调用context[fn](...arg)时候，...arg是为了展开数组，依次传入参数调用函数 */
+           
+           // 实现apply
+           Function.prototype.myapply = function(context,arg){
+               const fn = Symbol('临时属性')
+               context[fn] = this
+               context[fn](arg)
+               delete context[fn]
+           }
+           
+           const obj2 = {
+               a: 1
+           }
+           test.myapply(obj2,[1,2,3])
+           // apply传递的第二个参数是数组，这里只需要在调用时，将参数用...把数组展开即可
+            
         </script>
 	</body>
 </html>

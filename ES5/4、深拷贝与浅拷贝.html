@@ -39,12 +39,15 @@
             obj1.b.c = 10;
             console.log(obj1);  // { a: 1, b: { c: 10}} 
             console.log(obj2);  // { a: 0, b: { c: 10}} 
+            // Object.assign第一级属于深拷贝，第二级开始属于浅拷贝
+            
             
             // 实现3(使用拓展运算符...)
             
             
             // 深拷贝
             // 使用slice和concat的伪深拷贝
+            // slice() 方法可从已有的数组中返回选定的元素。
             var arr = [1,2,3,4];
             var arr2 = arr.slice();
             var arr3 = arr.concat();
@@ -56,6 +59,7 @@
             console.log(arr3)   //[1,2,3,4]
             
             // 数组中的对象元素(Object,Array等)只是复制了引用
+            
             var farr = [1,2,[2,3],4];
             var farr2 = farr.slice();
             var farr3 = farr.concat();
