@@ -33,3 +33,5 @@ Vue.prototype：为Vue对象添加了一个原型属性，而不是一个全局�
 
 Vue.config
 
+`Props,methods,data和computed`的初始化都是在`beforeCreated和created`之间完成的
+
