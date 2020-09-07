@@ -24,7 +24,6 @@ git push origin test
 // 查看分支
 git branch
 
-
 // 查看远程分支
 git branch -r
 
@@ -51,9 +50,20 @@ git branch -D test // 强制删除分支
 
 // 删除远程分支
 git push origin -d test 
+
+// 把test分支合并到当前分支
+git merge test  
+// 
 ```
 
-#### 分支合并
+
+#### 其他
 ```JavaScript
+// 查看状态
+git status
 
+// 查看日志
+git log
 ```
+
+![GitCheatSheet](GitCheatSheet.jpg)
