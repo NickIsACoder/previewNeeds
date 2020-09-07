@@ -15,6 +15,8 @@ git pull
 git add . 
 git commit -m '提交修改'
 git push
+// 或者
+git push origin test
 ```
 
 #### 分支
@@ -22,16 +24,36 @@ git push
 // 查看分支
 git branch
 
-// 创建本地分支
 
-// 提交本地分支
+// 查看远程分支
+git branch -r
+
+// 创建本地分支
+git branch test
+
+// 提交本地分支到远程
+// 1、远程已有test分支且已经关联本地test分支，且本地已切换到分支test
+git push
+// 2、远程已有test分支但未关联本地分支test，且本地已切换到分支test
+git push -u origin/test   // origin/test表示远程的test分支
+// 3、远程没有test分支，且本地已切换到分支test
+git push origin test:test  // :号前面未本地分支名称，后面为远端分支名称(没有会自动创建)
+
 
 // 切换分支
 git checkout test
 
 // 删除本地分支
 git branch -d test
+// 注：删除分支时如果出现错误error：The 'test' is not fully merged
+//  意思为test分支还没有被合并，如果删除，将会丢失修改。需使用强制删除
+git branch -D test // 强制删除分支
 
 // 删除远程分支
 git push origin -d test 
+```
+
+#### 分支合并
+```JavaScript
+
 ```
