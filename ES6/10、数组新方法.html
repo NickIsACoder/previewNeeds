@@ -6,6 +6,16 @@
 	</head>
 	<body>
         <script type="text/javascript">
+						// Array of()  
+						// 使用Array.of()会把所有传入的参数都被设为数组元素
+						// es5 中 
+						// var arr = new Array(3);
+						// console.log(arr, arr[0]); // [empty × 3]  undefined
+						// var arr = new Array('3'); // ['3']
+						// 使用es6
+						let arr = Array of(3)   //[3]
+						
+					
             // Array.from()
             // 将一个类数组对象或者可遍历对象转换成一个真正的数组
             // 类数组对象，最基本的要求就是具有length属性的对象
@@ -26,6 +36,15 @@
             // let newarr2 = Array.from(arrayLike2);
             // console.log(newarr) //["tom", "65", "男", ['jane','john','Mary']]
             // console.log(newarr2)//[]
+						
+						
+						// function test() {
+						// 第二个参数(可选)是一个函数，可以对一个参数中的对象中的每一个的值进行转换；
+						//     let arr = Array.from(arguments, val => val * 2);
+						//     return arr;
+						// }
+						// let arr1 = test(1, 2, 3, 4);
+						// console.log(arr1); // [2, 4, 6, 8]
             
             // 属性名需为数字
             /* let arrayLike3 = {
