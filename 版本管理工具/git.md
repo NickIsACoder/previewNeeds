@@ -64,6 +64,28 @@ git status
 
 // 查看日志
 git log
+
+git show HEAD // 查看最后一次提交修改的详细信息 也可以用git show 哈希值 查看对应的内容
+git show HEAD^ // 查看倒数第二次的提交修改详细信息
+
+git diff // 查看变更 工作区与暂存区的差异比对
+git diff --cached // 暂存区与提交版本的差异
+git diff HEAD // 工作区与仓库中最后一次提交版本的差别
+
+
+git config --list // 获取config信息
+```
+
+#### 标签
+```JavaScript
+// 查看列出所有打过的标签名
+git tag
+
+// 删除对应标签
+git tag -d 标签名 
+
+// 在当前仓库打个标签
+git tag 标签名字 
 ```
 
 ![GitCheatSheet](GitCheatSheet.jpg)
