@@ -59,11 +59,8 @@ git merge test
 
 #### 其他
 ```JavaScript
-// 查看状态
-git status
-
-// 查看日志
-git log
+git status  // 显示有变更的文件
+git log  // 显示当前分支的版本历史
 
 git show HEAD // 查看最后一次提交修改的详细信息 也可以用git show 哈希值 查看对应的内容
 git show HEAD^ // 查看倒数第二次的提交修改详细信息
@@ -74,6 +71,8 @@ git diff HEAD // 工作区与仓库中最后一次提交版本的差别
 
 
 git config --list // 获取config信息
+
+// 回撤
 ```
 
 #### 标签

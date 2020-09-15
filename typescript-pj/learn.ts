@@ -59,3 +59,15 @@ function aaa(type:number|string):string{
 //         } 
 //     } 
 // } 
+
+// 枚举类型
+enum Direction {
+    NORTH, 
+    SOUTH = 's', 
+    EAST = 'e', 
+    WEST = 2
+}
+let dir:Direction = Direction.NORTH
+console.log(dir)
+console.log(Direction.SOUTH, Direction.EAST, Direction.WEST)
+

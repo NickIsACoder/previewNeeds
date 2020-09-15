@@ -54,3 +54,14 @@ function aaa(type) {
 //         } 
 //     } 
 // } 
+// 枚举类型
+var Direction;
+(function (Direction) {
+    Direction[Direction["NORTH"] = 0] = "NORTH";
+    Direction["SOUTH"] = "s";
+    Direction["EAST"] = "e";
+    Direction[Direction["WEST"] = 2] = "WEST";
+})(Direction || (Direction = {}));
+var dir = Direction.NORTH;
+console.log(dir);
+console.log(Direction.SOUTH, Direction.EAST, Direction.WEST);
