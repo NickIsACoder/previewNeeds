@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 原生方法请求(报跨域的错误)
+			// var ajax = new XMLHttpRequest()
+			// ajax.open('get', 'https://sp1.baidu.com/5b11fzupBgM18t7jm9iCKT-xh_/sensearch?wd=vue&cb=getData')
+			// ajax.send()
+			// ajax.onreadystatechange = function () {
+			// 	console.log(ajax)
+			// }
+			
+			
+			// jsonP请求，处理跨域
+			// function callback(data){
+			// 	console.log(data)
+			// }
+			// function addScript(url){
+			// 	var script = document.createElement('script')
+			// 	script.src = url
+			// 	document.body.appendChild(script)
+			// }
+			// addScript('https://sp1.baidu.com/5b11fzupBgM18t7jm9iCKT-xh_/sensearch?wd=vue&cb=callback')
+			
+			
+			// jq方式1
+			// &cb=?要加上，这样getJSON才会知道要用jsonp方式去访问服务
+			// $.getJSON('https://sp1.baidu.com/5b11fzupBgM18t7jm9iCKT-xh_/sensearch?wd=vue&cb=?', function(data){
+			// 	console.log(data)
+			// })
+			// 实际请求的链接为
+			// https://sp1.baidu.com/5b11fzupBgM18t7jm9iCKT-xh_/sensearch?wd=vue&cb=jQuery111007278045005367375_1603268240507&_=1603268240508
+			
+			$.ajax({
+				url: 'https://sp1.baidu.com/5b11fzupBgM18t7jm9iCKT-xh_/sensearch?wd=vue&cb=?',
+				dataType: 'jsonp',
+				jsonpCallback: 'funcCallback',
+				success: function(data){
+					console.log(0,data)
+				}
+			})
+			
+			function funcCallback(data){
+				console.log(1,data)
+			}
+			
+			// 0和1都会执行 ，实际请求的链接cb=funcCallback
+		</script>
+	</body>
+</html>
