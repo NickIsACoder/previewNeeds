@@ -35,3 +35,8 @@ Vue.config
 
 `Props,methods,data和computed`的初始化都是在`beforeCreated和created`之间完成的
 
+
+Vue name的作用
+* 当项目使用keep-alive时，可搭配组件name进行缓存过滤 （include、exclude）
+* DOM做递归组件时（递归组件是指组件自身调用自身）
+* vue-devtools调试工具里显示的组件名称是由vue中组件name决定的
