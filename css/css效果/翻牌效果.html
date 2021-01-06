@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			img{
+				display: block;
+				width: 100%;
+			}
+			body{
+				background-image: linear-gradient( 110.5deg,  rgba(248,196,249,0.66) 22.8%, rgba(253,122,4,0.15) 64.6% );
+			}
+			.card-container{
+				perspective: 1000px;
+				/* ↑立体透视深度 */
+				
+				width: 200px;
+				height: 300px;
+				line-height: 300px;
+				position: relative;
+				margin: 50px auto;
+			}
+			.cover,.back{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				transition: all 1s ease;
+				text-align: center;
+				backface-visibility: hidden;
+				border-radius: 5px;
+				box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.18);
+			}
+			.cover{
+				background-color: #006E38;
+				transform: rotateY(0deg);
+			}
+			.back{
+				background-color: #5F9EA0;
+				transform: rotateY(-180deg);
+			}
+			.card-container:hover .cover{
+				transform: rotateY(180deg);
+			}
+			.card-container:hover .back{
+				transform: rotateY(0deg);
+			}
+			.card{
+				transform: rotateY(60deg);
+				backface-visibility: hidden;
+				/* ↑用于控制html元素的背面能否被看到 */
+			}
+		</style>
+	</head>
+	<body>
+		<div class="card-container">
+			<div class="cover">COVER</div>
+			<div class="back">BACK</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function callNick1(success,connectedCallback,disconnectedCallback){
+			  console.log('Calling Nick')
+			  setTimeout( ()=>{
+			    if(success){
+			      (typeof connectedCallback === 'function')&& connectedCallback()
+			    }else{
+			      (typeof disconnectedCallback === 'function')&& disconnectedCallback()
+			    }
+			  },3000)
+			}
+			
+			callNick1(false,()=>{
+			  console.log('Nick picked up the phone.')
+			},()=>{
+			  console.log('Nick rejected the call.')
+			})
+			
+			
+			// promise的方式
+			function callNick2(success){
+			  return new Promise((resolve,reject)=>{
+			    console.log('Calling Nick')
+			    setTimeout( ()=>{
+			      if(success){
+			        resolve()
+			      }else{
+			        reject()
+			      }
+			    },3000)
+			  })
+			}
+			
+			callNick2(false)
+			  .then(()=>{
+			  console.log('Nick picked up the phone.')
+			})
+			  .catch(()=>{
+			  console.log('Nick rejected the call.')
+			})
+			
+			// async&await方式
+			async function action(){
+			  try{
+			    await callNick2(true)
+			  //   意思为在try的代码区块内，await等待callNick2()的promise结果，为resolve()则继续执行后续代码，为reject()则执行catch里面的代码
+			    console.log('Nick picked up the phone.')
+			  }catch{
+			    console.log('Nick rejected the call.')
+			  }
+			}
+			action()
+		</script>
+	</body>
+</html>

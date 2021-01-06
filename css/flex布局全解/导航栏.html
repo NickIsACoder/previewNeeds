@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+			.flex-container1{
+				display: flex;
+				justify-content: space-around;
+				background: #5F9EA0;
+				padding: 5px 0;
+			}
+			.flex-container1 li a{
+				display: block;
+				padding: 5px 10px;
+				color: #333;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 例1 -->
+		<ul class="flex-container1">
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Products</a></li>
+			<li><a href="#">Portfolio</a></li>
+			<li><a href="#">Contact us</a></li>
+		</ul>
+		
+		
+		<style type="text/css">
+			.flex-container2{
+				margin-top: 50px;
+				display: flex;
+			}
+			.flex-container2 li{
+				padding: 5px 20px;
+				height: 50px;
+			}
+			.flex-container2 .center{
+				flex: 1 1 auto;
+				/* .center有足够空间就扩大，无足够空间就缩小 */
+			}
+		</style>
+		<!-- 例2 -->
+		<ul class="flex-container2">
+			<li style="background-color: #008080;"></li>
+			<li style="background-color: #006E38;" class="center"></li>
+			<li style="background-color: #5F9EA0;"></li>
+		</ul>
+		
+		
+		<style type="text/css">
+			.post{
+				display: flex;
+				padding: 10px;
+			}
+			.thumbnail{
+				flex: 0 1 200px;
+				min-width: 100px;
+			}
+			.thumbnail img{
+				width: 100%;
+				display: block;
+			}
+			.content{
+				display: flex;
+				flex-direction: column;
+				margin-left: 1.2em;
+				flex: 1 1 auto;
+			}
+			.title{
+				font-size: 1.2em;
+				font-weight: bold;
+			}
+			
+		</style>
+		<!-- 例3 -->
+		<div class="flex-container3" style="margin-top: 50px;">
+			<div class="post">
+				<div class="thumbnail">
+					<img src="https://img-blog.csdnimg.cn/20191121153548424.png" >
+				</div>
+				<div class="content">
+					<h4 class="title">Example Example</h4>
+					<div class="excerpt">
+						框架的核心是一个响应的数据绑定系统，可以让数据与视图非常简单地保持同步。当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新。
+						框架的核心是一个响应的数据绑定系统，可以让数据与视图非常简单地保持同步。当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新。
+					</div>
+				</div>
+			</div>
+			<div class="post">
+				<div class="thumbnail">
+					<img src="https://img-blog.csdnimg.cn/20191121153548424.png" >
+				</div>
+				<div class="content">
+					<h4 class="title">Example Example</h4>
+					<div class="excerpt">
+						框架的核心是一个响应的数据绑定系统，可以让数据与视图非常简单地保持同步。当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新。
+						框架的核心是一个响应的数据绑定系统，可以让数据与视图非常简单地保持同步。当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新。
+					</div>
+				</div>
+			</div>
+			<div class="post">
+				<div class="thumbnail">
+					<img src="https://img-blog.csdnimg.cn/20191121153548424.png" >
+				</div>
+				<div class="content">
+					<h4 class="title">Example Example</h4>
+					<div class="excerpt">
+						框架的核心是一个响应的数据绑定系统，可以让数据与视图非常简单地保持同步。当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新。
+						框架的核心是一个响应的数据绑定系统，可以让数据与视图非常简单地保持同步。当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新。
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<style type="text/css">
+			.flex-container4{
+				width: 600px;
+				margin-top: 50px;
+				font-size: 1em;
+				background-color: #333;
+				color: white;
+				display: flex;
+				overflow-x: auto;
+			}
+			.flex-container4 li{
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				/* 设置width: 100px; 时，flex-container的宽度小于li宽总和，li的宽会被等比缩小 */
+				flex: 0 0 100px;
+				/* 用此设定不允许缩放，固定宽度为100px */
+			}
+		</style>
+		<!-- 例4 -->
+		<ul class="flex-container4">
+			<li style="background-color: #006E38;"></li>
+			<li style="background-color: #008080;"></li>
+			<li style="background-color: #032380;"></li>
+			<li style="background-color: #0537CC;"></li>
+			<li style="background-color: #293F80;"></li>
+			<li style="background-color: #2C3E50;"></li>
+			<li style="background-color: #537EFF;"></li>
+			<li style="background-color: #5F9EA0;"></li>
+		</ul>
+	</body>
+</html>

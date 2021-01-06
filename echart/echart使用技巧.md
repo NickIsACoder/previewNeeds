@@ -8,6 +8,11 @@ tooltip: {
 },
 ```
 
+#### 重新设置图形高度
+```javascript
+mychart.resize({height:380});
+```
+
 #### tooltip显示超出视图范围的解决方法
 * 将tooltip限制在容器内
 ```javascript

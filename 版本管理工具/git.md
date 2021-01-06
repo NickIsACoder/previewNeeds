@@ -10,6 +10,11 @@ git clone https://github.com/NickIsACoder/justForTest.git
 git pull
 ```
 
+#### 保存windows凭证
+```JavaScript
+git config --global credential.helper manager
+```
+
 #### 提交代码
 ```JavaScript
 git add . 
