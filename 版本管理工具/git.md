@@ -92,4 +92,14 @@ git tag -d 标签名
 git tag 标签名字 
 ```
 
+#### 撤销提交
+```JavaScript
+提交 -> 撤销上次提交 --> 更改 -> 取消暂存所有更改 
+ 
+// push之后版本回退 （1代表第几个版本）
+git reset --hard HEAD~1
+成功之后执行一次拉取，把提交的东西拉回本地
+
+```
+
 ![GitCheatSheet](GitCheatSheet.jpg)
